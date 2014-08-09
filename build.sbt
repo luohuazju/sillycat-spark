@@ -27,7 +27,9 @@ resolvers ++= Seq(
 libraryDependencies ++= Seq(
     "org.scalatest"       %   "scalatest_2.10"            % "1.9.1"   % "test",
     "org.specs2"          %%  "specs2"                    % "1.13"    % "test",
-    "org.apache.spark"    %%  "spark-core"                % "1.0.2"
+    "org.apache.spark"    %%  "spark-core"                % "1.0.2",
+    "joda-time"           %   "joda-time"                 % "2.4",
+    "org.joda"            %   "joda-convert"              % "1.6"
 )
 
 seq(Revolver.settings: _*)
