@@ -9,7 +9,7 @@ organization := "com.sillycat"
 
 version := "1.0" 
 
-scalaVersion := "2.10.0"
+scalaVersion := "2.10.4"
 
 scalacOptions := Seq("-unchecked", "-deprecation", "-encoding", "utf8") 
 
@@ -25,11 +25,11 @@ resolvers ++= Seq(
 )
 
 libraryDependencies ++= Seq(
-    "org.scalatest"       %   "scalatest_2.10"            % "1.9.1"   % "test",
-    "org.specs2"          %%  "specs2"                    % "1.13"    % "test",
     "org.apache.spark"    %%  "spark-core"                % "1.0.2",
     "joda-time"           %   "joda-time"                 % "2.4",
-    "org.joda"            %   "joda-convert"              % "1.6"
+    "org.joda"            %   "joda-convert"              % "1.6",
+  "com.google.protobuf" % "protobuf-java" % "2.4.1",
+  "org.spark-project.protobuf" % "protobuf-java" % "2.4.1-shaded"
 )
 
 seq(Revolver.settings: _*)
@@ -51,7 +51,7 @@ mergeStrategy in assembly <<= (mergeStrategy in assembly) { (old) =>
       (xs map {_.toLowerCase}) match {
             case ("manifest.mf" :: Nil) | ("eclipsef.rsa" :: Nil) | ("index.list" :: Nil) | ("dependencies" :: Nil) =>
               MergeStrategy.discard
-            case ps @ (x :: xs) if ps.last.endsWith(".sf") || ps.last.endsWith(".dsa") =>
+            case ps @ (x :: xs) if ps.last.endsWith(".sf") || ps.last.endsWith(".dsa") || ps.last.endsWith("pom.properties") || ps.last.endsWith("pom.xml") =>
               MergeStrategy.discard
             case "plexus" :: xs =>
               MergeStrategy.discard
