@@ -25,7 +25,7 @@ resolvers ++= Seq(
 )
 
 libraryDependencies ++= Seq(
-    "org.apache.spark"    %%  "spark-core"                % "0.9.0-incubating",
+    "org.apache.spark"    %%  "spark-core"                % "1.0.2",
     "joda-time"           %   "joda-time"                 % "2.4",
     "org.joda"            %   "joda-convert"              % "1.6",
   "com.google.protobuf" % "protobuf-java" % "2.4.1",
