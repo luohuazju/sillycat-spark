@@ -25,7 +25,7 @@ resolvers ++= Seq(
 )
 
 libraryDependencies ++= Seq(
-    "org.apache.spark"    %%  "spark-core"                % "1.0.2",
+    "org.apache.spark"    %%  "spark-core"                % "0.9.0-incubating",
     "joda-time"           %   "joda-time"                 % "2.4",
     "org.joda"            %   "joda-convert"              % "1.6",
   "com.google.protobuf" % "protobuf-java" % "2.4.1",
@@ -43,6 +43,7 @@ mergeStrategy in assembly <<= (mergeStrategy in assembly) { (old) =>
     case PathList("javax", "servlet", xs @ _*) => MergeStrategy.first
     case PathList("org", "apache", "jasper", xs @ _*) => MergeStrategy.first
     case PathList("org", "fusesource", xs @ _*) => MergeStrategy.first
+    case PathList("org", "apache", "commons", xs @ _*) => MergeStrategy.first
     case PathList("org", "apache", "commons", "beanutils", xs @ _*) => MergeStrategy.first
     case PathList("org", "apache", "commons", "collections", xs @ _*) => MergeStrategy.first
     case PathList("com", "esotericsoftware", "minlog", xs @ _*) => MergeStrategy.first
