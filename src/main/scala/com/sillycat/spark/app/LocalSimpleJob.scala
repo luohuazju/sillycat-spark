@@ -3,9 +3,9 @@ package com.sillycat.spark.app
 import org.apache.spark.SparkContext
 
 object LocalSimpleJob extends App{
-  val sparkMaster = "spark://192.168.11.12:7077"
+  val sparkMaster = "spark://ubuntu-master1:7077"
 
-  val logFile = "/var/log/apache2" // Should be some file on your system
+  val logFile = "file:///opt/spark/README.MD" // Should be some file on your system
   val sc = new SparkContext(sparkMaster,
       "Simple Job",
       "/opt/spark",
