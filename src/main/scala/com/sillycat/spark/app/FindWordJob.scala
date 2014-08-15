@@ -10,7 +10,9 @@ object FindWordJob {
   def main(args: Array[String]) {
     val conf = new SparkConf()
     conf.setAppName("FindWordJob")
-    conf.set("spark.executor.uri","/opt/spark")
+    if(args.size > 2){
+      conf.set("spark.executor.uri",args(1).toString)
+    }
     val sc = new SparkContext(conf)
     val threshold = args(0).toString
 
