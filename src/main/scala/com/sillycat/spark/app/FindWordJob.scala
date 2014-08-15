@@ -8,7 +8,10 @@ import org.apache.spark.SparkConf
 object FindWordJob {
 
   def main(args: Array[String]) {
-    val sc = new SparkContext(new SparkConf().setAppName("Complex Job"))
+    val conf = new SparkConf()
+    conf.setAppName("FindWordJob")
+    conf.set("spark.executor.uri","/opt/spark")
+    val sc = new SparkContext(conf)
     val threshold = args(0).toString
 
     val products = Seq("book1", "book2", "book3", "book4")
