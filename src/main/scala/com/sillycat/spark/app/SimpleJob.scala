@@ -2,7 +2,7 @@ package com.sillycat.spark.app
 
 import org.apache.spark.SparkContext
 
-object LocalSimpleJob extends App{
+object SimpleJob extends App{
   val sparkMaster = "spark://ubuntu-master1:7077"
 
   val logFile = "file:///opt/spark/README.MD" // Should be some file on your system

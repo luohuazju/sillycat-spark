@@ -8,7 +8,7 @@ class CustomRegistrator extends KryoRegistrator{
 
   override def registerClasses(kryo:Kryo): Unit ={
     kryo.register(classOf[Product])
-    //kryo.register(classOf[DateTime])
+    kryo.register(classOf[DateTime])
   }
 
 }
