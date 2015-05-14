@@ -1,8 +1,6 @@
-package com.sillycat.spark.app
+package com.sillycat.spark.app.bak
 
-import org.apache.spark.SparkContext
-import org.apache.spark.SparkContext._
-import org.apache.spark.SparkConf
+import org.apache.spark.{SparkConf, SparkContext}
 
 
 object FindWordJob extends App{

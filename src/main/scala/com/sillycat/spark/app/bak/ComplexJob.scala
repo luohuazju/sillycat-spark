@@ -1,9 +1,7 @@
-package com.sillycat.spark.app
+package com.sillycat.spark.app.bak
 
-import org.apache.spark.SparkContext
-import org.apache.spark.SparkContext._
-import org.apache.spark.SparkConf
 import com.sillycat.spark.model.Product
+import org.apache.spark.{SparkConf, SparkContext}
 
 /**
  * Created by carl on 5/12/15.
