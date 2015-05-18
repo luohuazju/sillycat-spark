@@ -12,3 +12,4 @@ object Resolvers {
 
   val myResolvers = Seq (local, maven, sonatype, sona_snap, typsafe, spary, spary2, akka)
 }
+
