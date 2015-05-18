@@ -26,15 +26,15 @@ object ApplicationBuild extends Build {
     BuildSettings.projectName,
     file("."),
     settings = BuildSettings.buildSettings ++ assemblySettings
-    ++
-    Seq(resolvers := myResolvers,
+      ++
+      Seq(resolvers := myResolvers,
         libraryDependencies ++= baseDeps,
         mergeStrategy in assembly := mergeFirst
-    )
-    ++
-    Packaging.settings
-    ++
-    Packaging.server
+      )
+      ++
+      Packaging.settings
+      ++
+      Packaging.server
   ) settings(
     mainClass in assembly := Some("com.sillycat.spark.app.ExecutorApp"),
     excludedJars in assembly <<= (fullClasspath in assembly) map { cp =>
@@ -49,7 +49,7 @@ object ApplicationBuild extends Build {
       val reference = resources / "application.conf"
       Seq(log4j -> "conf/log4j.properties", reference -> "conf/application.conf")
     }
-  )
+    )
 
   lazy val mergeFirst: String => MergeStrategy = {
     case PathList("javax", "servlet", xs @ _*) => MergeStrategy.first
