@@ -7,14 +7,14 @@ object FindWordJob extends App{
 
     val conf = new SparkConf()
     conf.setAppName("FindWordJob")
-    if(args.size > 2){
-      conf.set("spark.executor.uri",args(1).toString)
-    }
+//    if(args.size > 2){
+//      conf.set("spark.executor.uri",args(1).toString)
+//    }
     //conf.setMaster("local[2]")
     //conf.set("spark.executor.uri","local[2]")
     val sc = new SparkContext(conf)
-    val threshold = args(0).toString
-    //val threshold = "book1"
+    //val threshold = args(0).toString
+    val threshold = "book1"
 
     val products = Seq("book1", "book2", "book3", "book4")
 
