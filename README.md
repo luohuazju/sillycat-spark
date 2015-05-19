@@ -15,7 +15,7 @@ TODO
 >bin/sillycat-spark -Dspark.context.master="local[4]" com.sillycat.spark.app.CountLinesOfKeywordApp
 
 3. Run on binary on Remote Spark Cluster
->bin/sillycat-spark -Dspark.context.master="spark://ubuntu-master:7070" com.sillycat.spark.app.CountLinesOfKeywordApp
+>bin/sillycat-spark -Dspark.context.master="spark://ubuntu-master:7077" com.sillycat.spark.app.CountLinesOfKeywordApp
 
 Compile
 >sbt clean update compile universal:packageBin
