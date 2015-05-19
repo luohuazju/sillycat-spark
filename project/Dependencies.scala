@@ -10,7 +10,8 @@ object Dependencies {
   //https://hadoop.apache.org/docs/r2.6.0/hadoop-project-dist/hadoop-common/dependency-analysis.html
   val baseDeps = Seq (
     "org.apache.spark"    %  "spark-core_2.10"            % spark_version  excludeAll(excludeGuava),
-    "org.apache.hadoop"   %  "hadoop-client"               % hadoop_version excludeAll(excludeGuava,excludeJetty,excludeServlet),
+    "org.apache.spark"    %  "spark-yarn_2.10"            % spark_version  excludeAll(excludeGuava),
+    "org.apache.hadoop"   %  "hadoop-client"              % hadoop_version excludeAll(excludeGuava,excludeJetty,excludeServlet),
     "com.google.guava"    %  "guava"                      % "11.0.2",
     "joda-time"           %  "joda-time"                  % "2.4",
     "org.joda"            %  "joda-convert"               % "1.6",
