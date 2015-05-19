@@ -8,7 +8,7 @@ TODO
 3. support spark SQL
 4. support spark streaming
 
-1. Run that on Local
+1. Develop that on Local
 >sbt "run com.sillycat.spark.app.CountLinesOfKeywordApp"
 
 2. Run on Binary on Local

@@ -1,24 +1,22 @@
 package com.sillycat.spark.app
 
-import com.sillycat.spark.SparkApp
+import com.sillycat.spark.base.SparkBaseApp
 import com.typesafe.config.ConfigFactory
 import org.apache.spark.rdd.RDD
 import org.apache.spark.{SparkConf, SparkContext}
 import org.slf4j.LoggerFactory
 
-class CountLinesOfKeywordApp extends SparkApp{
+class CountLinesOfKeywordApp extends SparkBaseApp{
 
   val log = LoggerFactory.getLogger("CountLinesOfKeywordApp")
 
+  override def getAppName():String = {
+    "CountLinesOfKeywordApp"
+  }
+
   override def executeTask(params : Array[String]): Unit ={
     val config = ConfigFactory.load()
-    val conf = new SparkConf()
-    conf.setMaster(config.getString("spark.context.master"))
-    conf.setAppName("SimpleJob")
-    conf.setSparkHome(config.getString("spark.context.home"))
-    conf.setJars(SparkContext.jarOfClass(this.getClass).toSeq)
-    conf.set("spark.serializer", "org.apache.spark.serializer.KryoSerializer")
-
+    val conf = getSparkConf(config)
     val sc = new SparkContext(conf)
 
     var logFile = "file:///" + config.getString("spark.context.home") + "/README.md"
