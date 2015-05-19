@@ -22,4 +22,4 @@ Run on binary on Remote Spark Cluster
 >bin/sillycat-spark -Dspark.context.master="spark://ubuntu-master:7077" com.sillycat.spark.app.CountLinesOfKeywordApp
 
 Run on the YARN cluster
->bin/sillycat-spark -Dspark.context.master="yarn-cluster" com.sillycat.spark.app.CountLinesOfKeywordApp
+>bin/sillycat-spark -Dspark.context.master="yarn-client" com.sillycat.spark.app.CountLinesOfKeywordApp
