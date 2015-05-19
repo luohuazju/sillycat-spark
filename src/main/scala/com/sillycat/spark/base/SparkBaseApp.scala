@@ -18,7 +18,7 @@ trait SparkBaseApp {
 
   def getSparkConf(config: Config):SparkConf = {
     val conf = new SparkConf()
-    conf.setMaster(config.getString("spark.context.master"))
+    //conf.setMaster(config.getString("spark.context.master"))
     conf.setAppName(getAppName)
     conf.setSparkHome(config.getString("spark.context.home"))
     conf.setJars(SparkContext.jarOfClass(this.getClass).toSeq)
