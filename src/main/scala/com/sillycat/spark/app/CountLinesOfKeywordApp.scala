@@ -6,7 +6,7 @@ import org.apache.spark.rdd.RDD
 import org.apache.spark.{SparkConf, SparkContext}
 import org.slf4j.LoggerFactory
 
-object CountLinesOfKeywordApp extends SparkApp{
+class CountLinesOfKeywordApp extends SparkApp{
 
   val log = LoggerFactory.getLogger("CountLinesOfKeywordApp")
 
@@ -21,7 +21,7 @@ object CountLinesOfKeywordApp extends SparkApp{
 
     val sc = new SparkContext(conf)
 
-    var logFile = "file:///" + config.getString("spark.context.home") + "/README.MD"
+    var logFile = "file:///" + config.getString("spark.context.home") + "/README.md"
     var keyword = "a"
 
     log.info("Prepare the resource from %s".format(logFile))

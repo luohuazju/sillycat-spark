@@ -1,6 +1,5 @@
 package com.sillycat.spark
 
-import com.sillycat.spark.SparkApp
 import org.slf4j.LoggerFactory
 
 import scala.reflect.runtime.universe
@@ -29,10 +28,11 @@ object ExecutorApp extends App{
     }
   }
 
-  val runtimeMirror = universe.runtimeMirror(getClass.getClassLoader)
-  val module = runtimeMirror.staticModule(className)
-  val obj = runtimeMirror.reflectModule(module)
-  val task = obj.asInstanceOf[SparkApp]
+  val mirror = universe.runtimeMirror(getClass.getClassLoader);
+  val classInstance = Class.forName(className);
+  val classSymbol = mirror.classSymbol(classInstance);
+  val classType = classSymbol.toType;
+  val task = classInstance.newInstance().asInstanceOf[SparkApp];
   task.executeTask(args)
 
 }
