@@ -18,8 +18,8 @@ trait SparkBaseApp {
 
   def getSparkConf(config: Config):SparkConf = {
     val conf = new SparkConf()
-    //conf.setMaster(config.getString("spark.context.master"))
     conf.setAppName(getAppName)
+    conf.setIfMissing("spark.master", "local[4]")
     conf.setSparkHome(config.getString("spark.context.home"))
     conf.setJars(SparkContext.jarOfClass(this.getClass).toSeq)
     conf.set("spark.serializer", "org.apache.spark.serializer.KryoSerializer")

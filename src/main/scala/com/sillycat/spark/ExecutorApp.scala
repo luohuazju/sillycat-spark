@@ -16,12 +16,12 @@ object ExecutorApp extends App{
 
   var className = "com.sillycat.spark.app.CountLinesOfKeywordApp"
 
-  args.size match  {
+  className = args.size match  {
     case 1 =>{
-      className = args(0).toString
+      args(0).toString
     }
     case x:Int if (x > 2) => {
-      className = args(0).toString
+      args(0).toString
     }
     case _ => {
       log.error("No args, system will just exit.")
