@@ -31,8 +31,6 @@ object ExecutorApp extends App{
 
   val mirror = universe.runtimeMirror(getClass.getClassLoader);
   val classInstance = Class.forName(className);
-  val classSymbol = mirror.classSymbol(classInstance);
-  val classType = classSymbol.toType;
   val task = classInstance.newInstance().asInstanceOf[SparkBaseApp];
   task.executeTask(args)
 
