@@ -43,6 +43,7 @@ object ApplicationBuild extends Build {
     artifact in (Compile, assembly) ~= { art =>
       art.copy(`classifier` = Some("assembly"))
     },
+    fork in run :=true,
     mappings in Universal <++= sourceDirectory  map { src =>
       val resources = src / "main" / "resources"
       val log4j = resources / "log4j.properties"
