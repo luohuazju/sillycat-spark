@@ -25,7 +25,7 @@ object ApplicationBuild extends Build {
   lazy val main = Project(
     BuildSettings.projectName,
     file("."),
-    settings = BuildSettings.buildSettings ++ assemblySettings
+    settings = BuildSettings.buildSettings ++ assemblySettings ++ addArtifact(artifact in (Compile, assembly), assembly)
       ++
       Seq(resolvers := myResolvers,
         libraryDependencies ++= baseDeps,
@@ -49,7 +49,11 @@ object ApplicationBuild extends Build {
       val log4j = resources / "log4j.properties"
       val reference = resources / "application.conf"
       Seq(log4j -> "conf/log4j.properties", reference -> "conf/application.conf")
-    }
+    },
+    //credentials += Credentials("sillycat_repo", "ubuntu-pilot", "developer", "developer"),
+    //credentials += Credentials(Path.userHome / ".sbt" / ".credentials"),
+    isSnapshot := true,
+    publishTo := Some("Sillycat Realm" at "http://ubuntu-pilot:8080/artifactory/libs-release-local")
     )
 
   lazy val mergeFirst: String => MergeStrategy = {
