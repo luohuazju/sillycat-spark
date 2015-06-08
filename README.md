@@ -14,6 +14,8 @@ Develop that on Local
 
 >sbt "run com.sillycat.spark.app.CountDeviceSqlApp"
 
+>sbt "run com.sillycat.spark.app.AttributesStreamingApp"
+
 
 Generate the Binary File
 >sbt clean update compile assembly

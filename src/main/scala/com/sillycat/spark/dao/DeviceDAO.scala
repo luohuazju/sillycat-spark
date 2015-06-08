@@ -54,18 +54,8 @@ class DeviceDAO (sqlc: SQLContext) {
 
     val jrdd = new JdbcRDD(sc,
       MysqlDBHelper.nativeConnection,
-      """select
-          id,
-          tenant_id,
-          date_created,
-          last_updated,
-          device_id,
-          os_type,
-          os_version,
-          search_radius,
-          sdk_major_version,
-          last_time_zone,
-          sendable
+      """select id, tenant_id, date_created, last_updated, device_id, os_type, os_version,
+          search_radius, sdk_major_version, last_time_zone, sendable
          from
           device d
          where

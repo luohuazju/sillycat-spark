@@ -23,7 +23,7 @@ class CountLinesOfKeywordApp extends SparkBaseApp{
     var keyword = "a"
 
     log.info("Prepare the resource from %s".format(logFile))
-    val rdd = hadoopRdd(sc, logFile)
+    val rdd = generateRdd(sc, logFile)
     log.info("Executing the calculation based on keyword %s".format(keyword))
     val result = processRows(rdd, keyword)
     log.info("Lines with keyword %s : %s".format(keyword, result))
@@ -31,7 +31,7 @@ class CountLinesOfKeywordApp extends SparkBaseApp{
     sc.stop
   }
 
-  def hadoopRdd(sc:SparkContext, logFile:String) : RDD[String] = {
+  def generateRdd(sc:SparkContext, logFile:String) : RDD[String] = {
     val logData = sc.textFile(logFile, 10)
     logData
   }

@@ -1,28 +1,54 @@
 package com.sillycat.spark.app
 
-import org.apache.spark.SparkConf
-import org.apache.spark.streaming.Seconds
-import org.apache.spark.streaming.StreamingContext
+import com.sillycat.spark.base.SparkBaseApp
+import com.typesafe.config.ConfigFactory
+import org.apache.spark.streaming.dstream.DStream
+import org.apache.spark.{SparkContext, SparkConf}
+import org.apache.spark.streaming.{Minutes, Seconds, StreamingContext}
+import org.apache.spark.streaming.kafka.KafkaUtils
+import org.slf4j.LoggerFactory
 
 /**
  * Created by carl on 5/22/15.
  */
-class AttributesStreamingApp extends App{
+class AttributesStreamingApp extends SparkBaseApp{
 
-  private val master = "local[2]"
-  private val appName = "example-spark"
+  val log = LoggerFactory.getLogger("CountLinesOfKeywordApp")
 
   private val batchDuration = Seconds(1)
   private val windowDuration = Seconds(30)
   private val slideDuration = Seconds(3)
 
-  val conf = new SparkConf()
-    .setMaster(master)
-    .setAppName(appName)
+  override def getAppName():String = {
+    "AttributesStreamingApp"
+  }
 
-  val ssc = new StreamingContext(conf, batchDuration)
+  override def executeTask(params : Array[String]): Unit ={
+    val config = ConfigFactory.load()
+    val conf = getSparkConf(config)
 
-  ssc.start()
-  ssc.awaitTermination()
+    val ssc = new StreamingContext(conf, batchDuration)
+    ssc.checkpoint(getAppName())
+
+    log.info("Prepare the resource.")
+    val rdd = generateRdd(ssc)
+    processRows(rdd)
+
+    ssc.start()
+    ssc.awaitTermination()
+  }
+
+  def generateRdd(ssc:StreamingContext) : DStream[String] = {
+    val logData = KafkaUtils.createStream(ssc, "localhost:2181", getAppName, Map("test" -> 1)).map(_._2)
+    logData
+  }
+
+  def processRows(rows: DStream[String]):DStream[(String, Long)] = {
+    val words = rows.flatMap(_.split(" "))
+    val wordCounts = words.map(x => (x, 1L))
+      .reduceByKeyAndWindow(_ + _, _ - _, windowDuration, slideDuration, 2)
+    log.info("Lines with keyword %s".format(wordCounts))
+    wordCounts
+  }
 
 }
