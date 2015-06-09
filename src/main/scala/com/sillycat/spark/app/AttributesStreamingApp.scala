@@ -2,6 +2,7 @@ package com.sillycat.spark.app
 
 import com.sillycat.spark.base.SparkBaseApp
 import com.typesafe.config.ConfigFactory
+import org.apache.spark.rdd.RDD
 import org.apache.spark.streaming.dstream.DStream
 import org.apache.spark.{SparkContext, SparkConf}
 import org.apache.spark.streaming.{Minutes, Seconds, StreamingContext}
@@ -17,7 +18,7 @@ class AttributesStreamingApp extends SparkBaseApp{
 
   private val batchDuration = Seconds(1)
   private val windowDuration = Seconds(30)
-  private val slideDuration = Seconds(3)
+  private val slideDuration = Seconds(30)
 
   override def getAppName():String = {
     "AttributesStreamingApp"
@@ -31,22 +32,23 @@ class AttributesStreamingApp extends SparkBaseApp{
     ssc.checkpoint(getAppName())
 
     log.info("Prepare the resource.")
-    val rdd = generateRdd(ssc)
-    processRows(rdd)
+    generateRdd(ssc, "a")
 
     ssc.start()
     ssc.awaitTermination()
   }
 
-  def generateRdd(ssc:StreamingContext) : DStream[String] = {
+  def generateRdd(ssc:StreamingContext, keyword:String) : Unit = {
     val logData = KafkaUtils.createStream(ssc, "localhost:2181", getAppName, Map("test" -> 1)).map(_._2)
-    logData
+    logData.window(windowDuration, slideDuration).foreachRDD { rdd =>
+      val result = processRows(rdd,keyword)
+      log.info("Lines with keyword %s : %s".format(keyword, result))
+    }
   }
 
-  def processRows(rows: DStream[String]): Unit = {
-    val words = rows.flatMap(_.split(" "))
-    val wordCounts = words.map(x => (x, 1L)).countByValueAndWindow(windowDuration,slideDuration,2)
-    wordCounts.print()
+  def processRows(rows: RDD[String], keyword: String):Long = {
+    val numA = rows.filter(line => line.contains(keyword)).count()
+    numA
   }
 
 }

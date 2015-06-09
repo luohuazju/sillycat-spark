@@ -6,7 +6,7 @@ import org.apache.spark.{SparkConf, SparkContext}
 /**
  * Created by carl on 5/18/15.
  */
-trait SparkBaseApp {
+trait SparkBaseApp extends Serializable{
 
   def executeTask(params : Array[String]): Unit ={
 
