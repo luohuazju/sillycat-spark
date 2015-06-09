@@ -43,12 +43,10 @@ class AttributesStreamingApp extends SparkBaseApp{
     logData
   }
 
-  def processRows(rows: DStream[String]):DStream[(String, Long)] = {
+  def processRows(rows: DStream[String]): Unit = {
     val words = rows.flatMap(_.split(" "))
-    val wordCounts = words.map(x => (x, 1L))
-      .reduceByKeyAndWindow(_ + _, _ - _, windowDuration, slideDuration, 2)
-    log.info("Lines with keyword %s".format(wordCounts))
-    wordCounts
+    val wordCounts = words.map(x => (x, 1L)).countByValueAndWindow(windowDuration,slideDuration,2)
+    wordCounts.print()
   }
 
 }
