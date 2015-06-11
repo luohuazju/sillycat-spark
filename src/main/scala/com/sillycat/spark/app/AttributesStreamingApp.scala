@@ -31,7 +31,7 @@ class AttributesStreamingApp extends SparkBaseApp{
     val ssc = new StreamingContext(conf, batchDuration)
     ssc.checkpoint(getAppName())
 
-    log.info("Prepare the resource.")
+    log.info("Prepare the resource")
     generateRdd(ssc, "a")
 
     ssc.start()

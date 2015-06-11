@@ -40,5 +40,6 @@ class CountLinesOfKeywordApp extends SparkBaseApp{
     val numA = rows.filter(line => line.contains(keyword)).count()
     numA
   }
+
 }
 
