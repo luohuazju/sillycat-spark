@@ -43,6 +43,10 @@ class CountDeviceSqlApp extends SparkBaseApp{
     log.info("select brandId, count(*) from devices where sendable = 1 group by brandId")
     deviceDAO.numberOfDevices().collect().foreach(println)
 
+    deviceDAO.numberOfDevices().foreachPartition { case (brandId, num) =>
+
+    }
+
     sc.stop
   }
 
