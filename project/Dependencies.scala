@@ -14,6 +14,7 @@ object Dependencies {
     "org.apache.spark"    %%  "spark-streaming"            % spark_version  excludeAll(excludeGuava),
     "org.apache.spark"    %%  "spark-yarn"                 % spark_version  excludeAll(excludeGuava),
     "org.apache.spark"    %%  "spark-streaming-kafka"      % spark_version  excludeAll(excludeGuava),
+    "org.apache.spark"    %%  "spark-mllib"                % spark_version  excludeAll(excludeGuava),
     "org.apache.hadoop"   %   "hadoop-client"              % hadoop_version excludeAll(excludeGuava,excludeJetty,excludeServlet),
     "com.google.guava"    %   "guava"                      % "11.0.2",
     "joda-time"           %   "joda-time"                  % "2.4",
