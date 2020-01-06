@@ -2,9 +2,18 @@ sillycat-spark
 ==============
 
 TODO
+
 2. add unit testing
+
 3. support spark SQL
+
 4. support spark streaming
+
+Run command
+
+>sbt gen-idea
+
+>sbt eclipse
 
 How to Run the Project
 
